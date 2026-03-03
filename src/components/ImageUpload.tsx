@@ -40,23 +40,52 @@ export function ImageUpload({ label = 'Clique para fazer upload', style, classNa
     }
   }, [storageKey])
 
-  const onFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (!file) return
-    const reader = new FileReader()
-    reader.onload = ev => {
-      const dataUrl = ev.target?.result as string
-      setSrc(dataUrl)
-      setPos({ x: 50, y: 50 })
-      persist(dataUrl, { x: 50, y: 50 })
+
+    if (storageKey) {
+      // Upload para o servidor → salva em public/images/
+      const reader = new FileReader()
+      reader.onload = async ev => {
+        const dataUrl = ev.target?.result as string
+        const ext = file.name.split('.').pop()?.toLowerCase() ?? 'jpg'
+        try {
+          const res = await fetch(`/api/upload?key=${storageKey}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ dataUrl, ext }),
+          })
+          const { url } = await res.json()
+          setSrc(url)
+          setPos({ x: 50, y: 50 })
+          persist(url, { x: 50, y: 50 })
+        } catch {
+          // fallback: usa base64 em memória
+          setSrc(dataUrl)
+          setPos({ x: 50, y: 50 })
+        }
+      }
+      reader.readAsDataURL(file)
+    } else {
+      // Sem storageKey: apenas base64 em memória (temporário)
+      const reader = new FileReader()
+      reader.onload = ev => {
+        setSrc(ev.target?.result as string)
+        setPos({ x: 50, y: 50 })
+      }
+      reader.readAsDataURL(file)
     }
-    reader.readAsDataURL(file)
     e.target.value = ''
   }
 
   const clearImage = (e: React.MouseEvent) => {
     e.stopPropagation()
     e.preventDefault()
+    // Remove arquivo do servidor se for uma URL de arquivo
+    if (storageKey && src && !src.startsWith('data:')) {
+      fetch(`/api/upload?key=${storageKey}`, { method: 'DELETE' }).catch(() => {})
+    }
     setSrc(null)
     setPos({ x: 50, y: 50 })
     persist(null, { x: 50, y: 50 })
@@ -223,23 +252,43 @@ export function AvatarUpload({ size = 42, storageKey }: AvatarUploadProps) {
     } catch {}
   }, [storageKey])
 
-  const onFile = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onFile = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (!file) return
-    const reader = new FileReader()
-    reader.onload = ev => {
-      const dataUrl = ev.target?.result as string
-      setSrc(dataUrl)
-      if (storageKey) {
-        try { localStorage.setItem(`avatar_upload_${storageKey}`, dataUrl) } catch {}
+
+    if (storageKey) {
+      const reader = new FileReader()
+      reader.onload = async ev => {
+        const dataUrl = ev.target?.result as string
+        const ext = file.name.split('.').pop()?.toLowerCase() ?? 'jpg'
+        try {
+          const res = await fetch(`/api/upload?key=${storageKey}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ dataUrl, ext }),
+          })
+          const { url } = await res.json()
+          setSrc(url)
+          try { localStorage.setItem(`avatar_upload_${storageKey}`, url) } catch {}
+        } catch {
+          setSrc(dataUrl)
+          try { localStorage.setItem(`avatar_upload_${storageKey}`, dataUrl) } catch {}
+        }
       }
+      reader.readAsDataURL(file)
+    } else {
+      const reader = new FileReader()
+      reader.onload = ev => { setSrc(ev.target?.result as string) }
+      reader.readAsDataURL(file)
     }
-    reader.readAsDataURL(file)
     e.target.value = ''
   }
 
   const clearImage = (e: React.MouseEvent) => {
     e.stopPropagation()
+    if (storageKey && src && !src.startsWith('data:')) {
+      fetch(`/api/upload?key=${storageKey}`, { method: 'DELETE' }).catch(() => {})
+    }
     setSrc(null)
     if (storageKey) localStorage.removeItem(`avatar_upload_${storageKey}`)
   }

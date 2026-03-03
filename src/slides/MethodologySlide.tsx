@@ -18,7 +18,7 @@ const columns = [
     icon: PenTool,
     title: 'CRIAR',
     items: [
-      'Landing page de avaliação sigilosa',
+      'Landing page de captação',
       'Roteiro de criativos (antes/depois emocional, reação familiar)',
       'Configuração de pixel, eventos e rastreamento',
       'Automação de follow-up via WhatsApp',

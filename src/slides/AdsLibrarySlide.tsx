@@ -70,6 +70,7 @@ export function AdsLibrarySlide() {
                 minHeight: 0,
               }}>
                 <ImageUpload
+                  storageKey="ads-library"
                   label="Arraste ou clique para inserir o print do anúncio"
                   style={{ width: '100%', height: '100%' }}
                 />

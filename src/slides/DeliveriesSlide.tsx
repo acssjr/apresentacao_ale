@@ -4,7 +4,7 @@ import { Megaphone, Globe, Film, Activity, MessageCircle, MapPin, BarChart2, Mai
 
 const deliveries = [
   { Icon: Megaphone, title: 'Gestão de Tráfego Pago (Meta Ads)', desc: 'Criação, configuração e otimização contínua de campanhas no Facebook e Instagram.', value: 'R$1.200/mês', included: false },
-  { Icon: Globe, title: 'Landing Page de Avaliação Sigilosa', desc: 'Página de conversão com formulário, integração WhatsApp e pixel instalado.', value: 'R$1.500 único', included: false },
+  { Icon: Globe, title: 'Landing Page de Captação', desc: 'Página de conversão com formulário, integração WhatsApp e pixel instalado.', value: 'R$1.500 único', included: false },
   { Icon: Film, title: 'Roteiro de Criativos (4 vídeos/mês)', desc: 'Script, direção de gravação e orientação de edição para criativos que convertem.', value: 'R$800/mês', included: false },
   { Icon: Palette, title: 'Design Gráfico de Criativos', desc: 'Artes e peças visuais para feed, stories e anúncios com identidade profissional.', value: 'R$600/mês', included: false },
   { Icon: Video, title: 'Auxílio na Captação de Vídeos', desc: 'Orientação de produção, roteiro e briefing de gravação para o cliente executar.', value: 'R$400/mês', included: false },

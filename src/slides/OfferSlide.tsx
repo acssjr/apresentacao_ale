@@ -3,7 +3,7 @@ import { Check } from 'lucide-react'
 
 const planBase = [
   'Gestão de tráfego pago (Meta Ads)',
-  'Landing page de avaliação sigilosa',
+  'Landing page de captação',
   'Roteiro de 4 criativos/mês',
   'Configuração de pixel + eventos',
   'Automação de follow-up WhatsApp',

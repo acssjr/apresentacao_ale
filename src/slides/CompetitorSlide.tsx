@@ -63,6 +63,7 @@ export function CompetitorSlide() {
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flex: '0 0 auto', height: '100%' }}>
             <IPhoneMockup>
               <ImageUpload
+                storageKey="competitor-instagram"
                 label={'Clique para adicionar\nscreenshot do Instagram'}
                 style={{ width: '100%', height: '100%' }}
               />

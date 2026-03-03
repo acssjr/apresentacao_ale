@@ -21,7 +21,7 @@ export function MarketSlide() {
           O MERCADO DE PRÓTESE CAPILAR NO BRASIL
         </p>
         <h2 style={{ fontSize: 'clamp(28px, 5vw, 60px)', fontWeight: 700, lineHeight: 1.05, letterSpacing: '-0.01em', marginBottom: '3%', textTransform: 'uppercase' }}>
-          42 Milhões de Brasileiros<br />com Calvície. Zero Soluções<br />Digitais Para Eles.
+          42 Milhões de Brasileiros<br />com Calvície.
         </h2>
 
         <div className="flex gap-6" style={{ flex: 1, overflow: 'hidden' }}>

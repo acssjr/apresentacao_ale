@@ -14,7 +14,6 @@ import { OpportunitiesSlide } from './slides/OpportunitiesSlide'
 import { MethodologySlide } from './slides/MethodologySlide'
 import { DeliveriesSlide } from './slides/DeliveriesSlide'
 import { TimelineSlide } from './slides/TimelineSlide'
-import { OfferSlide } from './slides/OfferSlide'
 
 const slides = [
   <CoverSlide />,
@@ -32,7 +31,6 @@ const slides = [
   <MethodologySlide />,
   <DeliveriesSlide />,
   <TimelineSlide />,
-  <OfferSlide />,
 ]
 
 export default function App() {

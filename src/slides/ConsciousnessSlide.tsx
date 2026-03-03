@@ -16,7 +16,7 @@ const levels = [
     num: '2',
     state: 'CONSCIENTE DO PRODUTO',
     desc: 'Já ouviu falar de prótese, talvez conheça o Alan Santos. Precisa de prova social e de um argumento para escolher Alexandre.',
-    action: 'Depoimento real + avaliação sigilosa como porta de entrada',
+    action: 'Depoimento real + landing page de captação como porta de entrada',
     badge: 'ALTA PRIORIDADE',
     badgeColor: '#00C8FF',
     badgeBg: 'rgba(0,200,255,0.1)',
